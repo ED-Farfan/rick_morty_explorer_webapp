@@ -1,0 +1,33 @@
+.contenedor404{
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    position: relative;
+    .imgBig{
+        height: 500px;
+        left: -100px;
+        position: absolute;
+        z-index: 5;
+    }
+    .contendorText{
+        position: absolute;
+        top: 50%; /* Centramos verticalmente en el 50% del contenedor */
+        left: 50%; /* Centramos horizontalmente en el 50% del contenedor */
+        transform: translate(-50%, -50%); 
+        color: aliceblue;        
+        z-index: 10;
+        h1{
+            font-size: 15rem;
+            text-align: center;
+        }
+        h2{
+            font-size: 2rem;
+
+        }
+        .contenedorBoton{
+            padding-top: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+    }    
+}
