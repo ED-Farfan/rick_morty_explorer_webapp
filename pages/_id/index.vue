@@ -229,10 +229,15 @@ export default {
       }
       if (!error && data) {
         this.episodesURL = this.episodesURL.slice(this.dataCount)
-        data.forEach((result) => {
-          const episode = new Episode(result)
+        if (Array.isArray(data)) {
+          data.forEach((result) => {
+            const episode = new Episode(result)
+            this.episodes.push(episode)
+          })
+        } else {
+          const episode = new Episode(data)
           this.episodes.push(episode)
-        })
+        }
       }
       this.loaderEpisodes = false
     },

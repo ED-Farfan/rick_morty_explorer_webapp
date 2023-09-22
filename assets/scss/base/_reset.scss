@@ -12,28 +12,28 @@ html{
     display: flex;
     flex-direction: column;
     .containerNav{
-        max-height: max(4rem,50px);
+        max-height: 100px;
+        height: 80px !important;        
     }
     .containerApp{
         flex-grow: 1;
         background: rgb(169,207,255);
         background: linear-gradient(0deg, rgba(224,241,255,1) 35% , rgba(169, 208, 255, 0.61)  );
         overflow-y: scroll;
-        /* Barra de desplazamiento */
+        
 &::-webkit-scrollbar {
-    width:min(0.5rem,5px) ; /* Ancho de la barra de desplazamiento */
-    // background-color: #E0F1FF; /* Color de fondo de la barra de desplazamiento */
+    width:min(0.5rem,5px)
   }
   
-  /* Manija de la barra de desplazamiento */
+ 
   &::-webkit-scrollbar-thumb {
-    background-color: #4E79B5; /* Color de la manija de la barra de desplazamiento */
-    border-radius: min(0.5rem,5px); /* Radio de borde para la manija de la barra de desplazamiento */
+    background-color: #4E79B5; 
+    border-radius: min(0.5rem,5px);
   }
   
-  /* Pista de la barra de desplazamiento (parte no seleccionada) */
+  
   &::-webkit-scrollbar-track {
-    background-color: #E0F1FF; /* Color de fondo de la pista de la barra de desplazamiento */
+    background-color: #E0F1FF; 
   }
     }
 }
