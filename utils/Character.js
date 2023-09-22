@@ -1,5 +1,6 @@
 import { Origin } from './Origin'
 import { Location } from './Location'
+
 export class Character {
   constructor ({
     id,
@@ -20,6 +21,7 @@ export class Character {
     this.species = species || 'unknown'
     this.type = type || 'unknown'
     this.gender = gender || 'unknown'
+    this.color = this.gender.toLocaleLowerCase()
     this.origin = new Origin(origin)
     this.location = new Location(location)
     this.image = image || 'unknown'

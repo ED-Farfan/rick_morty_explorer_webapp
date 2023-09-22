@@ -1,9 +1,11 @@
 export class Origin {
-  constructor (
+  constructor ({
     name,
     url
+  } = {}
+
   ) {
     this.name = name || 'unknown'
-    this.name = url || null
+    this.url = url || null
   }
 }
