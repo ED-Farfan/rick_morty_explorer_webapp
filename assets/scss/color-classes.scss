@@ -2,7 +2,11 @@
 
 @each $color-name, $color-value in (
   primary: $primary-color,
-  secondary:$secondary-color
+  secondary:$secondary-color,
+  female:$famale-color,
+  male:$male-color,
+  genderless: $Genderless-color,
+  unknown: $Unknown-color
 ) {
   .text-#{$color-name} {
     color: $color-value;

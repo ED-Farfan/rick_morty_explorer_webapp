@@ -17,7 +17,7 @@ html{
     .containerApp{
         flex-grow: 1;
         background: rgb(169,207,255);
-        background: linear-gradient(35deg, rgba(169,207,255,1) 2%, rgba(224,241,255,1) 85%);
+        background: linear-gradient(0deg, rgba(224,241,255,1) 35% , rgba(169, 208, 255, 0.61)  );
         overflow-y: scroll;
         /* Barra de desplazamiento */
 &::-webkit-scrollbar {

@@ -1,12 +1,30 @@
 .containerCardsCharacter{
     display: grid;
     gap: 0rem;
-    grid-auto-rows: 12rem;
-    grid-template-columns: repeat( auto-fill, minmax(min(100%, 25rem),1fr));
+    grid-auto-rows:auto;
+    grid-template-columns: repeat( auto-fill, minmax(min(100%, 300px),1fr));
     grid-auto-flow: dense;
     .cardCharacter{
-        max-height: 12rem;
         position: relative;
         overflow-y: hidden;
+        .imagen{     
+                
+            width: 100%;
+            .v-image{
+                border-radius:10px;
+             }
+        }
+        
+    }
+    & .containerText{
+        padding-top: 1rem;        
+        position: relative;
+        .lineaVertical{
+            min-height: 10px;
+            height: 100%;
+            width: 5px;
+            border-radius: 5px;
+            // background-color: aqua;
+        }
     }
 }

@@ -1,90 +1,140 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <v-card class="logo py-4 d-flex justify-center">
-        <NuxtLogo />
-        <VuetifyLogo />
-      </v-card>
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-          {{ URL }}
-        </v-card-title>
-        <v-card-text>
-          <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
-          <p>
-            For more information on Vuetify, check out the <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              documentation
-            </a>.
-          </p>
-          <p>
-            If you have questions, please join the official <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="chat"
-            >
-              discord
-            </a>.
-          </p>
-          <p>
-            Find a bug? Report it on the github <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="contribute"
-            >
-              issue board
-            </a>.
-          </p>
-          <p>Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.</p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3">
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt Documentation
-          </a>
-          <br>
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt GitHub
-          </a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn
-            color="primary"
-            nuxt
-            to="/inspire"
-          >
-            Continue
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-col>
-  </v-row>
+  <div>
+    <div v-if="!loader" class="containerCardsCharacter mb-8">
+      <CardCharacter v-for="(character,index) in characters" :key="index" :character="character" class="cardCharacter" />
+    </div>
+    <div v-else class="containerCardsCharacter mb-10">
+      <v-sheet
+        v-for="(n) in 20"
+        :key="n"
+        color=" ma-2"
+      >
+        <v-skeleton-loader
+          class="mx-auto"
+          type="card"
+        />
+      </v-sheet>
+    </div>
+    <v-snackbar
+      :timeout="2000"
+      :value="snackbar"
+      absolute
+      bottom
+      color="red accent-2"
+      text
+    >
+      {{ textSnackbar }}
+      <template #action="{ attrs }">
+        <v-btn
+          color="red"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Cerrar
+        </v-btn>
+      </template>
+    </v-snackbar>
+    <div class="text-center">
+      <v-pagination
+        v-model="page"
+        :length="totalPages"
+        :total-visible="7"
+        circle
+        @input="clickPage"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
+import CardCharacter from '@/components/pages/character/CharacterDetails.vue'
+import { objectToQueryString } from '~/utils/querystring'
+import { getData } from '@/services/dataService'
+import { Character } from '@/utils/Character'
 export default {
-  name: 'IndexPage',
+  name: 'RickMortyExplorerWebappIndex',
+  components: { CardCharacter },
   data () {
     return {
+      page: 1,
+      dataCount: 20,
+      totalCharacters: 0,
+      totalPages: 0,
+      characters: [],
+      loader: true,
+      params: '',
+      snackbar: false,
+      textSnackbar: ''
+    }
+  },
 
-      URL: process.env.URL_BASE_API
+  mounted () {
+    this.loadData()
+  },
+
+  methods: {
+    async clickPage (pageNumber) {
+      const paramsOriginal = this.getParamsUrl()
+      const params = { ...paramsOriginal }
+      params.page = pageNumber
+
+      if (JSON.stringify(this.$route.query) !== JSON.stringify(params)) {
+        await this.$router.replace({ query: params })
+        window.location.reload()
+      }
+    },
+    setPageParameters ({ page } = {}) {
+      this.page = page ? Number(page) : 1
+    },
+    getParamsUrl () {
+      const params = this.$route.query
+      return params
+    },
+    async loadContent (Objectparams = {}) {
+      this.loader = true
+      this.characters = []
+      const ruta = 'character'
+      const params = objectToQueryString(Objectparams)
+      const { error, errorCode, errorText, data } = await getData({ ruta, variables: params })
+
+      if (error) {
+        if (errorCode === 404) {
+          this.$router.push('./404')
+        } else {
+          this.textSnackbar = `${errorText}`
+          this.snackbar = true
+        }
+      }
+      if (!error) {
+        const { error, info, results } = data
+        if (info && results) {
+          const { count, pages } = info
+          this.totalPages = pages
+          this.totalCharacters = count
+          const Characters = []
+          results.forEach((result) => {
+            const character = new Character(result)
+            Characters.push(character)
+          })
+          this.characters = Characters
+        }
+        if (!(info && results)) {
+          this.snackbar = true
+          this.textSnackbar = error ? `${error}` : 'Error al cargar los datos'
+        }
+      }
+      this.loader = false
+    },
+    loadData () {
+      const Objectparams = this.getParamsUrl()
+      this.setPageParameters(Objectparams)
+      this.loadContent(Objectparams)
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+
+</style>
