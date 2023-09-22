@@ -2,7 +2,7 @@ require('dotenv').config()
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - rick_morty_explorer_webapp',
+    titleTemplate: '%s - Rick Morty Webapp',
     title: 'rick_morty_explorer_webapp',
     htmlAttrs: {
       lang: 'en'

@@ -68,6 +68,11 @@ export default {
       textSnackbar: ''
     }
   },
+  head () {
+    return {
+      title: 'Home'
+    }
+  },
 
   mounted () {
     this.loadData()

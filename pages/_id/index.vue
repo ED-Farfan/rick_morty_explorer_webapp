@@ -175,7 +175,6 @@ import { getData } from '@/services/dataService'
 import { Episode } from '@/utils/Episode'
 export default {
   name: 'RickMortyExplorerWebappIndex',
-
   data () {
     return {
       Character: null,
@@ -186,6 +185,11 @@ export default {
       snackbar: false,
       textSnackbar: ''
 
+    }
+  },
+  head () {
+    return {
+      title: 'Detalle'
     }
   },
   computed: {
