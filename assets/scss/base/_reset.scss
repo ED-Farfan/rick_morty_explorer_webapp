@@ -1,0 +1,39 @@
+html{
+    overflow: hidden !important;
+    background: rgb(5,73,128);
+    background: linear-gradient(35deg, rgba(5,73,128,1) 7%, rgba(160,110,183,1) 85%);
+}
+.mainContainer{
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    max-width: 100vw;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    .containerNav{
+        max-height: max(4rem,50px);
+    }
+    .containerApp{
+        flex-grow: 1;
+        background: rgb(169,207,255);
+        background: linear-gradient(35deg, rgba(169,207,255,1) 2%, rgba(224,241,255,1) 85%);
+        overflow-y: scroll;
+        /* Barra de desplazamiento */
+&::-webkit-scrollbar {
+    width:min(0.5rem,5px) ; /* Ancho de la barra de desplazamiento */
+    // background-color: #E0F1FF; /* Color de fondo de la barra de desplazamiento */
+  }
+  
+  /* Manija de la barra de desplazamiento */
+  &::-webkit-scrollbar-thumb {
+    background-color: #4E79B5; /* Color de la manija de la barra de desplazamiento */
+    border-radius: min(0.5rem,5px); /* Radio de borde para la manija de la barra de desplazamiento */
+  }
+  
+  /* Pista de la barra de desplazamiento (parte no seleccionada) */
+  &::-webkit-scrollbar-track {
+    background-color: #E0F1FF; /* Color de fondo de la pista de la barra de desplazamiento */
+  }
+    }
+}

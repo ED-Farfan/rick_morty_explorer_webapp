@@ -1,0 +1,14 @@
+@import 'variables'; 
+
+@each $color-name, $color-value in (
+  primary: $primary-color,
+  secondary:$secondary-color
+) {
+  .text-#{$color-name} {
+    color: $color-value;
+  }
+
+  .bg-#{$color-name} {
+    background-color: $color-value;
+  }
+}
