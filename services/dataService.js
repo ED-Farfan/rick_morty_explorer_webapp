@@ -22,7 +22,10 @@ export const getData = async ({ ruta = '', variables = '' } = {}) => {
     result.data = response.data
   } catch (err) {
     result.error = true
-    if (err.response) {
+    if (err.message === 'Network Error') {
+      result.errorCode = -1
+      result.errorText = 'Network Error'
+    } else if (err.response) {
       const errorStatus = err.response.status
       result.errorCode = errorStatus
       result.errorText = errorMessages[errorStatus] || 'Error Desconocido'
