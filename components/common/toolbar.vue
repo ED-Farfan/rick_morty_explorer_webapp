@@ -40,11 +40,13 @@
       temporary
       class="efects"
     >
-      <div class="px-2 py-3">
-        <h1 class="text-primary mb-4">
-          Filter
-        </h1>
-        <div>
+      <div class="">
+        <div class="primary mb-4 pa-2 white--text">
+          <span class="text-h5">
+            Filter
+          </span>
+        </div>
+        <div class="px-3">
           <v-select
             v-model="gender"
             :items="genders"
@@ -111,6 +113,6 @@ export default {
 
 <style lang="scss" scoped>
 .efects{
-  background-image: linear-gradient(to left top, #6495ed, #99adf1, #c1c6f5, #e3e2fa, #ffffff);
+  background-color: #ffffff;
 }
 </style>
