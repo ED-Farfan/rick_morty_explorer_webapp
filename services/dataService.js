@@ -19,7 +19,7 @@ export const getData = async ({ ruta = '', variables = '' } = {}) => {
     const parameters = new URLSearchParams(variables).toString()
     const url = `${apiUrl}${ruta}/?${parameters}`
     const response = await axios.get(url)
-    result.data = response
+    result.data = response.data
   } catch (err) {
     result.error = true
     if (err.response) {
