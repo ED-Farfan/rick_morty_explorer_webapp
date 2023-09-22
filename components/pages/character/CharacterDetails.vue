@@ -100,7 +100,7 @@ export default {
       const { id: idCharacter } = this.character
       // const param = { id: idCharacter }
       // console.log('🚀 ~ file: CharacterDetails.vue:102 ~ clickSave ~ this.character:', this.character)
-      this.$router.push({ path: `/${idCharacter}` })
+      this.$router.push({ path: `/detalle/${idCharacter}` })
     },
     async SaveCharacter () {
       const newData = this.character

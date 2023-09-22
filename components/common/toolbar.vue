@@ -98,12 +98,12 @@ export default {
       const { page: pageQ, name: nameQ, gender: genderQ } = this.$route.query
       const { page: pageP, name: nameP, gender: genderP } = param
       if (pageQ !== pageP || nameQ !== nameP || genderQ !== genderP) {
-        await this.$router.push({ path: './', query: { ...param } })
+        await this.$router.push({ path: '/', query: { ...param } })
         if (this.$route.path === '/') {
-          await this.$router.replace({ path: './', query: { ...param } })
+          await this.$router.replace({ path: '/', query: { ...param } })
           window.location.reload()
         } else {
-          await this.$router.push({ path: './', query: { ...param } })
+          await this.$router.push({ path: '/', query: { ...param } })
         }
       }
     }
